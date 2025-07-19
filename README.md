@@ -74,7 +74,7 @@ Esto significa que puedes:
 - Usar, copiar y modificar libremente el contenido
 - Citar la fuente si compartes públicamente
 
-> © 2025 [Beto • Metalúrgica Data](https://github.com/tu_usuario)
+> © 2025 [Beto • Metalúrgica Data](https://github.com/elqvixote)
 
 ---
 
@@ -82,8 +82,8 @@ Esto significa que puedes:
 
 ¿Tienes preguntas, sugerencias o deseas contribuir?
 
-- 📧 metalurgicadata@gmail.com
-- 💼 [LinkedIn](https://www.linkedin.com/in/beto-garcia-metalurgico)
+- 📧 contacto@fornax.lat
+- 💼 [LinkedIn](https://www.linkedin.com/in/robertosheldon/)
 - 🌐 [Sitio web del proyecto (Notion – Prototipo)](https://beto.notion.site/metalurgica-data)
 
 ---
