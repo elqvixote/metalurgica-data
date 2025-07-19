@@ -88,4 +88,18 @@ Esto significa que puedes:
 
 ---
 
+## ☕ Apóyame en Ko-fi
+
+Este proyecto es desarrollado de forma abierta para compartir conocimientos y datasets útiles a la comunidad metalúrgica.  
+Tu apoyo me ayuda a mantenerlo y seguir creando contenido educativo.
+
+[![Buy me a coffee](https://github.com/user-attachments/assets/29a440f8-964e-44e7-97a7-853deab59ce7)](https://ko-fi.com/elqvixote)
+
+---
+
+
+
+
+---
+
 **Hagamos que la metalurgia también tenga un lugar en el mundo de los datos abiertos.**
