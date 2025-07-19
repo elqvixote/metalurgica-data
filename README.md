@@ -37,7 +37,7 @@ Crear y compartir datasets sintéticos, anonimizados o educativos de procesos co
 - Visualizar tendencias y variables críticas del proceso
 - Aplicar regresión, clasificación o clustering
 - Desarrollar dashboards con Power BI o Python
-- Crear modelos predictivos para optimización
+- Crear modelos de control de procesos y predictivos para optimización
 - Usarlos en clases, talleres o tesis
 
 ---
