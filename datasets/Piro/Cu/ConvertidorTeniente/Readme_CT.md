@@ -1,5 +1,6 @@
 📄 Registros Operacionales – Convertidor Teniente (CT) y Convertidor Pierce-Smith (CPS)
 Este conjunto de datos presenta los registros operacionales de dos hornos tipo Convertidor Teniente (CT) usados en la pirometalurgia del cobre.
+Los otros archivos tienen información más completa del proceso incluyendo cargas y leyes.
 
 🗂 Contenido del archivo
 Hoja "AIRE CTS": registros de flujo y presión de aire en los hornos CT1 y CT2.
@@ -38,6 +39,7 @@ Flujo y presión de aire soplado al CPS.
 
 Condiciones de operación diaria.
 
+Los datos son de https://github.com/FitoFitoFito/Info-Fundi
 📎 Licencia y uso
 Todos los datos se publican bajo licencia CC BY 4.0.
 Puedes usar, modificar y compartir este material.
