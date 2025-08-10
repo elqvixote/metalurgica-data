@@ -1,6 +1,6 @@
-📄 Dataset: Ensayos Charpy en Bobinas de Acero Laminado (9 meses)
+📄 Dataset: Ensayos Charpy en Bobinas de Acero Laminado en caliente (9 meses)
 1. Descripción General
-Este dataset contiene los resultados de ensayos Charpy realizados a muestras de bobinas de acero laminado, simulando 9 meses de producción continua.
+Este dataset contiene los resultados de ensayos Charpy realizados a muestras de bobinas de acero laminado en caliente, simulando 9 meses de producción continua.
 Incluye datos de producción, composición química, características de la muestra y resultados del ensayo, lo que permite análisis estadísticos, control de calidad y estudios de comportamiento de tenacidad a distintas temperaturas.
 
 El modelo de muestreo es:
