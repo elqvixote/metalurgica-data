@@ -94,7 +94,7 @@ Esto significa que puedes:
 
 > © 2025 [elqvixote • Metalúrgica Data](https://github.com/elqvixote)
 
----
+----
 
 ## 📬 Contacto
 
