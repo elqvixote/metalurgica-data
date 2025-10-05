@@ -89,7 +89,7 @@ Esto significa que puedes:
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/elqvixote/metalurgica-data/blob/main/notebooks/Ejemplo.ipynb)
 
 <!-- Badges personalizados -->
-![Datasets](https://img.shields.io/badge/Datasets-3-blue)
+![Datasets](https://img.shields.io/badge/Datasets-6-blue)
 ![Industry](https://img.shields.io/badge/Industry-Metallurgy-orange)
 
 > © 2025 [elqvixote • Metalúrgica Data](https://github.com/elqvixote)
