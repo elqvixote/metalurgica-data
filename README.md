@@ -74,7 +74,23 @@ Esto significa que puedes:
 - Usar, copiar y modificar libremente el contenido
 - Citar la fuente si compartes públicamente
 
-  [![DOI](https://zenodo.org/badge/1022395344.svg)](https://doi.org/10.5281/zenodo.17268996)
+[![DOI](https://zenodo.org/badge/1022395344.svg)](https://doi.org/10.5281/zenodo.17268996)
+![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/elqvixote/metalurgica-data)
+![GitHub last commit](https://img.shields.io/github/last-commit/elqvixote/metalurgica-data)
+![Contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)
+
+<!-- Badges de comunidad -->
+![GitHub Repo stars](https://img.shields.io/github/stars/elqvixote/metalurgica-data?style=social)
+![GitHub forks](https://img.shields.io/github/forks/elqvixote/metalurgica-data?style=social)
+
+<!-- Badges técnicos -->
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/elqvixote/metalurgica-data/HEAD)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/elqvixote/metalurgica-data/blob/main/notebooks/Ejemplo.ipynb)
+
+<!-- Badges personalizados -->
+![Datasets](https://img.shields.io/badge/Datasets-3-blue)
+![Industry](https://img.shields.io/badge/Industry-Metallurgy-orange)
 
 > © 2025 [elqvixote • Metalúrgica Data](https://github.com/elqvixote)
 
