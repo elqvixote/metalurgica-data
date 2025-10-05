@@ -74,6 +74,8 @@ Esto significa que puedes:
 - Usar, copiar y modificar libremente el contenido
 - Citar la fuente si compartes públicamente
 
+  [![DOI](https://zenodo.org/badge/1022395344.svg)](https://doi.org/10.5281/zenodo.17268996)
+
 > © 2025 [elqvixote • Metalúrgica Data](https://github.com/elqvixote)
 
 ---
