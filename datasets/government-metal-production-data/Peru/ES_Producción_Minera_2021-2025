@@ -1,0 +1,46 @@
+# Producción Minera del Perú - Datos Oficiales
+
+Este directorio contiene datos oficiales de producción minera del Perú, procesados y homologados para facilitar su análisis.
+
+## 📁 Contenido
+
+Datos de producción minera del Ministerio de Energía y Minas del Perú (MINEM) correspondientes al período **2021-2025**.
+
+## 🛠️ Procesamiento aplicado
+
+- **Limpieza y estandarización**: Homologación de nombres de empresas (normalización de acentos y variaciones ortográficas)
+- **Unidades de medida**: Unificación de criterios para todas las variables
+- **Oro y plata**: Creación de columna unificada en **gramos finos (g Fino)**, resolviendo la inconsistencia de unidades entre ambos metales (kg fino para oro vs. g fino para plata en la fuente original)
+
+## 🔄 Actualización
+
+La información se actualiza periódicamente. Para acceder a los datos originales o versiones más recientes, consulte la fuente oficial:
+
+➡️ [Ministerio de Energía y Minas - Producción Minera](https://www.gob.pe/institucion/minem/informes-publicaciones/5472883-produccion-minera)
+
+## 📊 Estructura de datos
+
+| Columna | Descripción |
+|---------|-------------|
+| **PAIS** | Perú |
+| **DEPARTAMENTO** | División administrativa de primer nivel y de mayor extensión territorial |
+| **PROVINCIA** | Unidad administrativa de segundo nivel, inferior al departamento |
+| **DISTRITO** | Unidad administrativa de tercer nivel, base de la organización territorial |
+| **ESTRATO** | Clasificación del productor: artesanal, pequeño productor o empresa minera de régimen general |
+| **PROCESO** | Tipo de proceso metalúrgico: flotación, gravimetría o lixiviación |
+| **ETAPA** | Etapa del proceso productivo: concentración, refinación o fundición |
+| **YEAR** | Año de producción |
+| **MES** | Nombre del mes |
+| **MES.1** | Número del mes (1-12) |
+| **MINERAL** | Metal procesado: arsénico, bismuto, cadmio, cobre, estaño, hierro, magnesio, manganeso, molibdeno, oro, plata, plomo, zinc, selenio |
+| **TITULAR** | Nombre de la empresa titular de la unidad minera |
+| **UNIDAD** | Nombre de la instalación o unidad de producción |
+| **UNIDAD DE MEDIDA** | Unidad de medida de la producción: g FINO, Kg FINO o TMF (Tonelada Métrica Fina) |
+| **Valor** | Volumen de producción en la unidad correspondiente |
+| **ORO-PLATA_gF** | Producción de oro y plata expresada en gramos finos (g FINO). Columna unificada creada durante el procesamiento |
+
+## 📝 Notas adicionales
+
+- La columna `ORO-PLATA_gF` consolida la producción de ambos metales en una unidad común para facilitar análisis comparativos.
+- Los valores en `UNIDAD DE MEDIDA` determinan la interpretación de la columna `Valor`.
+
