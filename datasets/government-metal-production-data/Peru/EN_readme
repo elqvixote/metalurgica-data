@@ -1,0 +1,45 @@
+# Peruvian Mining Production - Official Data
+
+This directory contains official mining production data from Peru, processed and standardized for analysis.
+
+## 📁 Content
+
+Mining production data from the Peruvian Ministry of Energy and Mines (MINEM) covering the period **2021-2025**.
+
+## 🛠️ Data Processing
+
+- **Cleaning & Standardization**: Company names homogenized (accents and spelling variations normalized)
+- **Measurement Units**: Unified criteria across all variables
+- **Gold & Silver**: Unified column created in **fine grams (g Fino)**, resolving the unit inconsistency between both metals (kg fine for gold vs. g fine for silver in the original source)
+
+## 🔄 Updates
+
+Data is periodically updated. For original datasets or more recent information, please visit the official source:
+
+➡️ [Ministry of Energy and Mines - Mining Production](https://www.gob.pe/institucion/minem/informes-publicaciones/5472883-produccion-minera)
+
+## 📊 Data Structure
+
+| Column | Description |
+|--------|-------------|
+| **PAIS** | Peru |
+| **DEPARTAMENTO** | First-level administrative division, largest territorial unit |
+| **PROVINCIA** | Second-level administrative unit, subordinate to department |
+| **DISTRITO** | Third-level administrative unit, base of territorial organization |
+| **ESTRATO** | Producer classification: artisanal, small producer, or general regime mining company |
+| **PROCESO** | Type of metallurgical process: flotation, gravimetry, or leaching |
+| **ETAPA** | Production stage: concentration, refining, or smelting |
+| **YEAR** | Production year |
+| **MES** | Month name |
+| **MES.1** | Month number (1-12) |
+| **MINERAL** | Processed metal: arsenic, bismuth, cadmium, copper, tin, iron, magnesium, manganese, molybdenum, gold, silver, lead, zinc, selenium |
+| **TITULAR** | Company name owning the mining unit |
+| **UNIDAD** | Production facility or unit name |
+| **UNIDAD DE MEDIDA** | Production measurement unit: g FINO, Kg FINO, or TMF (Fine Metric Tons) |
+| **Valor** | Production volume in the corresponding unit |
+| **ORO-PLATA_gF** | Gold and silver production expressed in fine grams (g FINO). Unified column created during processing |
+
+## 📝 Additional Notes
+
+- The `ORO-PLATA_gF` column consolidates production of both metals in a common unit to facilitate comparative analysis.
+- Values in `UNIDAD DE MEDIDA` determine how to interpret the `Valor` column.
