@@ -86,7 +86,7 @@ Esto significa que puedes:
 
 <!-- Badges técnicos -->
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/elqvixote/metalurgica-data/HEAD)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/elqvixote/metalurgica-data/blob/main/notebooks/Ejemplo.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://github.com/elqvixote/metalurgica-data/blob/main/MINEM_2021%E2%80%932025.ipynb)
 
 <!-- Badges personalizados -->
 ![Datasets](https://img.shields.io/badge/Datasets-6-blue)
