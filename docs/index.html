@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Metalúrgica Data — Open Datasets for Mining & Metallurgy</title>
+<meta name="description" content="Open database for metallurgical & mining processes. Synthetic and official datasets for data science, ML, and Power BI.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ore: #B87333;
+    --ore-light: #D4956A;
+    --ore-dark: #7A4A1E;
+    --steel: #1C1C1E;
+    --steel-mid: #2C2C2E;
+    --steel-light: #3A3A3C;
+    --dust: #F5F0E8;
+    --dust-mid: #E8E0D0;
+    --dust-dark: #C8BAA0;
+    --text-main: #1C1C1E;
+    --text-muted: #6E6055;
+    --accent: #B87333;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Lora', Georgia, serif;
+    background: var(--dust);
+    color: var(--text-main);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--steel);
+    color: var(--dust);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header-texture {
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(184,115,51,0.08) 39px, rgba(184,115,51,0.08) 40px),
+      repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(184,115,51,0.05) 39px, rgba(184,115,51,0.05) 40px);
+    pointer-events: none;
+  }
+
+  .header-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3rem 2rem 2.5rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: end;
+  }
+
+  .header-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ore-light);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .header-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 32px;
+    height: 1px;
+    background: var(--ore);
+  }
+
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3.5rem, 8vw, 6.5rem);
+    line-height: 0.92;
+    letter-spacing: 0.02em;
+    color: var(--dust);
+  }
+
+  h1 span {
+    color: var(--ore);
+  }
+
+  .header-sub {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--dust-dark);
+    margin-top: 1.2rem;
+    max-width: 560px;
+    line-height: 1.6;
+  }
+
+  .header-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    align-items: flex-end;
+    padding-bottom: 0.5rem;
+  }
+
+  .stat-chip {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: rgba(184,115,51,0.15);
+    border: 1px solid rgba(184,115,51,0.3);
+    color: var(--ore-light);
+    padding: 6px 14px;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+
+  .header-cta {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem 2.5rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 2px;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-primary {
+    background: var(--ore);
+    color: var(--dust);
+    border: 1px solid var(--ore);
+  }
+
+  .btn-primary:hover { background: var(--ore-light); border-color: var(--ore-light); }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--dust-mid);
+    border: 1px solid rgba(245,240,232,0.25);
+  }
+
+  .btn-secondary:hover { border-color: rgba(245,240,232,0.5); color: var(--dust); }
+
+  .divider-rule {
+    height: 4px;
+    background: linear-gradient(90deg, var(--ore) 0%, var(--ore-dark) 40%, var(--steel-mid) 100%);
+  }
+
+  /* MAIN */
+  main { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+
+  /* SECTION LABELS */
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--ore);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 2rem;
+    margin-top: 4rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--dust-dark);
+  }
+
+  h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    letter-spacing: 0.03em;
+    color: var(--text-main);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  /* DATASETS GRID */
+  .datasets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5px;
+    background: var(--dust-dark);
+    border: 1.5px solid var(--dust-dark);
+    margin-bottom: 4rem;
+  }
+
+  .dataset-card {
+    background: var(--dust);
+    padding: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.15s;
+    position: relative;
+  }
+
+  .dataset-card:hover { background: #EDE5D5; }
+
+  .dataset-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--dust-dark);
+    transition: background 0.15s;
+  }
+
+  .dataset-card:hover::before { background: var(--ore); }
+
+  .card-flag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .card-flag .tag {
+    background: var(--dust-mid);
+    padding: 2px 7px;
+    border-radius: 1px;
+    color: var(--ore-dark);
+    font-size: 9px;
+  }
+
+  .card-title {
+    font-family: 'Lora', serif;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-main);
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-desc {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: 0.8rem;
+  }
+
+  .card-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--dust-dark);
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .card-meta span { color: var(--text-muted); }
+
+  /* ABOUT STRIP */
+  .about-strip {
+    background: var(--steel);
+    color: var(--dust);
+    padding: 3.5rem 2rem;
+    margin: 0 -2rem 4rem;
+  }
+
+  .about-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .about-inner h2 { color: var(--dust); }
+
+  .about-inner p {
+    color: var(--dust-dark);
+    font-size: 0.95rem;
+    line-height: 1.75;
+    margin-top: 1rem;
+  }
+
+  .platform-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .platform-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    color: var(--dust-mid);
+    text-decoration: none;
+    padding: 10px 0;
+    border-bottom: 0.5px solid rgba(245,240,232,0.1);
+    transition: color 0.15s;
+  }
+
+  .platform-item:hover { color: var(--ore-light); }
+
+  .platform-icon {
+    width: 32px;
+    height: 32px;
+    background: var(--steel-mid);
+    border: 1px solid var(--steel-light);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  /* CONTRIBUTE */
+  .contribute-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 5rem;
+    align-items: start;
+  }
+
+  .contribute-section p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin-bottom: 1.5rem;
+  }
+
+  .step-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .step-list li {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .step-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--dust);
+    background: var(--ore-dark);
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--steel);
+    color: var(--dust-dark);
+    padding: 2.5rem 2rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+  }
+
+  .footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .footer-links a {
+    color: var(--dust-dark);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    transition: color 0.15s;
+  }
+
+  .footer-links a:hover { color: var(--ore-light); }
+
+  .footer-badge {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .badge {
+    background: var(--steel-mid);
+    border: 1px solid var(--steel-light);
+    padding: 3px 8px;
+    border-radius: 2px;
+    color: var(--ore-light);
+    font-size: 10px;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 700px) {
+    .header-inner { grid-template-columns: 1fr; }
+    .header-stats { align-items: flex-start; flex-direction: row; flex-wrap: wrap; }
+    .about-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .contribute-section { grid-template-columns: 1fr; }
+    .footer-inner { flex-direction: column; align-items: flex-start; }
+  }
+
+  /* FADE IN */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-up { animation: fadeUp 0.6s ease both; }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.22s; }
+  .delay-3 { animation-delay: 0.34s; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-texture"></div>
+  <div class="header-inner">
+    <div class="fade-up">
+      <div class="header-eyebrow">Open Data Initiative</div>
+      <h1>Metalúrgica<br><span>Data</span></h1>
+      <p class="header-sub">Open datasets for metallurgical & mining processes — built for data scientists, engineers, and researchers.</p>
+    </div>
+    <div class="header-stats fade-up delay-1">
+      <div class="stat-chip">6+ Datasets</div>
+      <div class="stat-chip">CC BY 4.0 License</div>
+      <div class="stat-chip">DOI: Zenodo</div>
+      <div class="stat-chip">Peru · Chile · LATAM</div>
+    </div>
+  </div>
+  <div class="header-cta fade-up delay-2">
+    <a class="btn btn-primary" href="https://github.com/elqvixote/metalurgica-data">GitHub Repository</a>
+    <a class="btn btn-secondary" href="https://www.kaggle.com/datasets" target="_blank">Kaggle Datasets</a>
+    <a class="btn btn-secondary" href="https://doi.org/10.5281/zenodo.17268996" target="_blank">Zenodo DOI</a>
+  </div>
+</header>
+
+<div class="divider-rule"></div>
+
+<main>
+
+  <div class="section-label fade-up">Available datasets</div>
+
+  <div class="datasets-grid">
+
+    <a class="dataset-card" href="https://github.com/elqvixote/metalurgica-data/tree/main/datasets/government-metal-production-data/Peru" target="_blank">
+      <div class="card-flag"><span>🇵🇪 Peru</span><span class="tag">Official</span></div>
+      <div class="card-title">Peruvian Metal Production (MINEM 2021–2025)</div>
+      <div class="card-desc">Official production data from Peru's Ministry of Energy and Mines. Covers copper, gold, silver, zinc, and more by region, company, and process.</div>
+      <div class="card-meta"><span>47,112 rows</span><span>17 columns</span><span>CSV</span></div>
+    </a>
+
+    <a class="dataset-card" href="https://github.com/elqvixote/metalurgica-data/tree/main/datasets" target="_blank">
+      <div class="card-flag"><span>🇨🇱 Chile</span><span class="tag">Official</span></div>
+      <div class="card-title">Chilean Copper Production by Company (1960–2018)</div>
+      <div class="card-desc">Historical series from COCHILCO. Includes Codelco divisions, Anglo American, and private miners. 58 years of copper mine output in thousands of MT.</div>
+      <div class="card-meta"><span>1960–2018</span><span>Miles TM</span><span>CSV</span></div>
+    </a>
+
+    <a class="dataset-card" href="https://github.com/elqvixote/metalurgica-data/tree/main/datasets/flotacion" target="_blank">
+      <div class="card-flag"><span>Synthetic</span><span class="tag">Educational</span></div>
+      <div class="card-title">Mineral Flotation Process Data</div>
+      <div class="card-desc">Synthetic dataset with realistic operating ranges for flotation circuits. Variables include pH, dosages, recovery rates, and feed grade.</div>
+      <div class="card-meta"><span>Synthetic</span><span>CSV</span></div>
+    </a>
+
+    <a class="dataset-card" href="https://github.com/elqvixote/metalurgica-data/tree/main/datasets/soldadura" target="_blank">
+      <div class="card-flag"><span>Synthetic</span><span class="tag">Educational</span></div>
+      <div class="card-title">Industrial & Naval Welding Data</div>
+      <div class="card-desc">Process parameters for industrial welding operations. Includes voltage, current, speed, and mechanical properties of weld joints.</div>
+      <div class="card-meta"><span>Synthetic</span><span>CSV</span></div>
+    </a>
+
+    <a class="dataset-card" href="https://github.com/elqvixote/metalurgica-data/tree/main/datasets/tratamientos_termicos" target="_blank">
+      <div class="card-flag"><span>Synthetic</span><span class="tag">Educational</span></div>
+      <div class="card-title">Heat Treatment Process Data</div>
+      <div class="card-desc">Temperature profiles, holding times, and resulting hardness values for common heat treatment cycles in steel and non-ferrous alloys.</div>
+      <div class="card-meta"><span>Synthetic</span><span>CSV</span></div>
+    </a>
+
+    <a class="dataset-card" href="https://github.com/elqvixote/metalurgica-data/blob/main/CONTRIBUTING.md" target="_blank">
+      <div class="card-flag"><span>Coming soon</span></div>
+      <div class="card-title">Want to contribute a dataset?</div>
+      <div class="card-desc">We welcome datasets on smelting, direct reduction, steelmaking, rolling, and mechanical testing. Read the contribution guide to get started.</div>
+      <div class="card-meta"><span>See CONTRIBUTING.md</span></div>
+    </a>
+
+  </div>
+
+</main>
+
+<div class="about-strip">
+  <div class="about-inner">
+    <div>
+      <div class="section-label" style="color: var(--ore-light); margin-top: 0;">About the project</div>
+      <h2>Where metallurgy meets open data</h2>
+      <p>Metalúrgica Data is an open initiative to build a public knowledge base of metallurgical process data — synthetic, educational, and official. Built for students, engineers, and data scientists who want to apply ML and analytics to the mining industry.</p>
+      <p>All datasets are documented with variable descriptions, units, and technical context. Each file is ready to load in Python, Power BI, or any data tool.</p>
+    </div>
+    <div>
+      <div class="platform-list">
+        <a class="platform-item" href="https://github.com/elqvixote/metalurgica-data" target="_blank">
+          <div class="platform-icon">GH</div>
+          GitHub — Source repository & releases
+        </a>
+        <a class="platform-item" href="https://www.kaggle.com" target="_blank">
+          <div class="platform-icon">KG</div>
+          Kaggle — Dataset exploration & notebooks
+        </a>
+        <a class="platform-item" href="https://doi.org/10.5281/zenodo.17268996" target="_blank">
+          <div class="platform-icon">ZN</div>
+          Zenodo — Citable DOI archive
+        </a>
+        <a class="platform-item" href="https://colab.research.google.com/github/elqvixote/metalurgica-data/blob/main/notebooks/Ejemplo.ipynb" target="_blank">
+          <div class="platform-icon">CO</div>
+          Google Colab — Run notebooks instantly
+        </a>
+        <a class="platform-item" href="https://mybinder.org/v2/gh/elqvixote/metalurgica-data/HEAD" target="_blank">
+          <div class="platform-icon">BD</div>
+          Binder — Interactive environment
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main>
+
+  <div class="contribute-section">
+    <div>
+      <div class="section-label" style="margin-top: 0;">Contribute</div>
+      <h2>Help build the collection</h2>
+      <p>This project grows with community contributions. Whether you have real anonymized data, synthetic datasets, or analytical notebooks — your input is welcome.</p>
+      <a class="btn btn-primary" style="display:inline-flex;" href="https://github.com/elqvixote/metalurgica-data/blob/main/CONTRIBUTING.md" target="_blank">Read the guide</a>
+    </div>
+    <div>
+      <ul class="step-list">
+        <li><div class="step-num">1</div><div>Fork the repository and create a new branch for your dataset.</div></li>
+        <li><div class="step-num">2</div><div>Add your CSV files inside the appropriate <code>datasets/</code> subfolder.</div></li>
+        <li><div class="step-num">3</div><div>Include a README.md with variable descriptions, units, and source information.</div></li>
+        <li><div class="step-num">4</div><div>Open a Pull Request — we review and merge promptly.</div></li>
+        <li><div class="step-num">5</div><div>Optionally share an analysis notebook in <code>notebooks/</code>.</div></li>
+      </ul>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div>© 2025 Roberto Sheldon · <a href="mailto:contacto@fornax.lat" style="color:var(--ore-light); text-decoration:none;">contacto@fornax.lat</a></div>
+    <div class="footer-links">
+      <a href="https://github.com/elqvixote/metalurgica-data">GitHub</a>
+      <a href="https://www.linkedin.com/in/robertosheldon/">LinkedIn</a>
+      <a href="https://doi.org/10.5281/zenodo.17268996">DOI</a>
+      <a href="https://github.com/elqvixote/metalurgica-data/blob/main/LICENSE">License</a>
+    </div>
+    <div class="footer-badge">
+      <span class="badge">CC BY 4.0</span>
+      <span class="badge">MIT</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
