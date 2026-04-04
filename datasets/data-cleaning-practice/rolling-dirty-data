@@ -1,0 +1,226 @@
+# Dataset Sintético: Proceso de Laminación de Acero
+
+## Descripción General
+
+Este dataset contiene **1,010 registros** simulados de un proceso de laminación de planchones de acero, diseñado específicamente para **practicar técnicas de limpieza y transformación de datos** con Pandas (Python) o Power Query.
+
+Los datos incluyen **problemas de calidad intencionales** que replican situaciones reales encontradas en sistemas de producción industrial: formatos inconsistentes, valores fuera de rango, datos faltantes, duplicados, y errores tipográficos.
+
+## Contexto del Proceso Metalúrgico
+
+En una planta de laminación de acero, los planchones (lingotes de acero) se calientan y pasan por rodillos para reducir su espesor. El proceso debe controlar múltiples variables para garantizar la calidad del producto final:
+
+- **Temperatura** (900-1200°C): Afecta la plasticidad del acero
+- **Velocidad de laminación** (3-8 m/s): Impacta la productividad y calidad superficial
+- **Fuerza de rodillos** (500-2000 ton): Determina la reducción de espesor
+- **Dureza Brinell** (120-180 HB): Mide la resistencia del acero final
+
+## Estructura del Dataset
+
+### Columnas
+
+| Columna | Tipo Esperado | Descripción | Valores Normales |
+|---------|---------------|-------------|------------------|
+| `id_lote` | string (formato `ACERO-####`) | Identificador único del planchón | `ACERO-0001` a `ACERO-1010` |
+| `fecha` | datetime | Fecha de producción | Enero 2024 |
+| `turno` | categorical | Turno de producción | `Mañana`, `Tarde`, `Noche` |
+| `espesor_entrada_mm` | float | Espesor inicial (mm) | 150.0 - 250.0 |
+| `espesor_salida_mm` | float | Espesor final (mm) | 10.0 - 50.0 |
+| `velocidad_laminacion_mps` | float | Velocidad de laminación (m/s) | 3.0 - 8.0 |
+| `fuerza_rodillos_ton` | int | Fuerza aplicada (toneladas) | 500 - 2000 |
+| `dureza_brinell_hb` | int | Dureza Brinell | 120 - 180 |
+| `defectos` | categorical | Tipo de defecto | `ok`, `rayones`, `inclusiones`, `grietas` |
+| `temperatura_laminacion_c` | int | Temperatura del proceso (°C) | 900 - 1200 |
+
+## Problemas de Calidad Incluidos (Intencionales)
+
+El dataset contiene **~30% de registros con algún tipo de anomalía** para simular datos industriales reales:
+
+### 1. Duplicados
+- **10 IDs repetidos** (filas completamente duplicadas)
+
+### 2. Formatos incorrectos en IDs (20 registros)
+- `acero-1234` (minúsculas)
+- `ACERO 1234` (espacio en lugar de guión)
+- `1234` (sin prefijo)
+- `Acero-1234` (mayúscula inicial)
+
+### 3. Fechas inconsistentes (30 registros)
+- Mezcla de formato `DD/MM/AAAA` y `MM/DD/AAAA`
+- Ejemplo: `01/02/2024` puede ser 1 de febrero o 2 de enero
+
+### 4. Turnos no estandarizados (25 registros)
+- Mayúsculas: `MANANA`, `MAÑANA`
+- Abreviaciones: `M`, `T`, `N`
+- Híbridos: `TARDE-NOCHE`, `NOCHE-TARDE`
+- Minúsculas: `mañana`, `tarde`
+
+### 5. Espesor de entrada (40 registros)
+- Valores fuera de rango: 300-500 mm (muy alto)
+- Valores negativos: -50 a -1 mm
+- Valores bajos: 0-100 mm
+- Comas como separador decimal: `195,5` (texto)
+
+### 6. Espesor de salida (35 registros)
+- Mayor al espesor de entrada (físicamente imposible)
+- Valores negativos
+- Valor cero
+
+### 7. Velocidad de laminación (30 registros)
+- Texto: `<3`, `>8`
+- Valor nulo: `N/A`
+
+### 8. Fuerza de rodillos (25 registros)
+- Puntos como separador de miles: `1.500` (texto)
+
+### 9. Dureza Brinell (30 registros)
+- Unidad incluida: `150HB` (texto)
+- Valores fuera de rango: 50-100 (muy bajo), 250-350 (muy alto)
+
+### 10. Defectos (40 registros)
+- Inglés: `scratch`, `crack`, `slag`
+- Abreviaciones: `R`, `I`, `G`
+- Sinónimos: `rayado`, `lineas`, `fisura`, `incl`
+- Valores vacíos o `-`
+
+### 11. Temperatura (25 registros)
+- Fuera de rango: >1300°C (sobrecalentamiento), <700°C (muy frío)
+- Valores nulos (10 registros)
+
+## Métricas de Calidad
+
+| Indicador | Porcentaje |
+|-----------|------------|
+| Registros completamente limpios | ~70% |
+| Registros con al menos 1 problema | ~30% |
+| Valores nulos | ~1% |
+| Formato incorrecto en ID | ~2% |
+| Errores en fechas | ~3% |
+| Valores numéricos como texto | ~10% |
+| Valores fuera de rango | ~12% |
+| Duplicados exactos | ~1% |
+
+## Ejercicios Sugeridos
+
+### Nivel Básico (Exploración)
+1. **Cargar el dataset** y mostrar las primeras 5 filas
+2. **Identificar tipos de datos** de cada columna
+3. **Contar valores nulos** por columna
+4. **Detectar filas duplicadas** por `id_lote`
+
+### Nivel Intermedio (Limpieza)
+5. **Unificar formato de IDs**: todos deben ser `ACERO-####`
+6. **Estandarizar turnos** a: `Mañana`, `Tarde`, `Noche`
+7. **Convertir fechas** a tipo datetime (manejar formato mixto)
+8. **Limpiar columnas numéricas**:
+   - Reemplazar comas por puntos en `espesor_entrada_mm`
+   - Quitar puntos de miles en `fuerza_rodillos_ton`
+   - Extraer números de `dureza_brinell_hb` (quitar "HB")
+9. **Reemplazar valores no numéricos** en `velocidad_laminacion_mps`:
+   - `<3` → 2.9
+   - `>8` → 8.1
+   - `N/A` → null
+
+### Nivel Avanzado (Análisis)
+10. **Filtrar registros válidos** según rangos industriales
+11. **Calcular reducción de espesor**: `espesor_entrada - espesor_salida`
+12. **Agrupar por turno** y calcular:
+    - Promedio de temperatura
+    - Mediana de dureza
+    - Conteo de defectos por tipo
+13. **Ordenar por fecha** y analizar tendencia de defectos
+14. **Crear columna de eficiencia**:
+    - `ALTA` si reducción > 150 mm y sin defectos
+    - `MEDIA` si reducción 100-150 mm
+    - `BAJA` si reducción < 100 mm o con defectos
+
+### Nivel Experto (Business Intelligence)
+15. **Detectar outliers** usando IQR (rango intercuartil)
+16. **Imputar valores nulos** de temperatura usando la mediana por turno
+17. **Crear reporte de calidad por lote**:
+    - ¿Qué lotes tienen mayor probabilidad de defectos?
+    - Correlación entre temperatura y dureza
+18. **Generar tabla resumen** con:
+    - Producción total por día
+    - Tasa de defectos por turno
+    - Cumplimiento de especificaciones
+
+## Solución Rápida con Pandas (Ejemplo)
+
+```python
+import pandas as pd
+import re
+
+# Cargar datos
+df = pd.read_csv('dataset_laminacion_acero_sucio.csv')
+
+# 1. Limpiar IDs
+df['id_lote'] = df['id_lote'].str.upper().str.replace(' ', '-')
+df['id_lote'] = df['id_lote'].apply(lambda x: f"ACERO-{re.search(r'\d+', x).group()}" if re.search(r'\d+', x) else x)
+
+# 2. Estandarizar turnos
+mapeo_turnos = {
+    'MANANA': 'Mañana', 'MAÑANA': 'Mañana', 'M': 'Mañana', 'mañana': 'Mañana',
+    'TARDE': 'Tarde', 'T': 'Tarde', 'tarde': 'Tarde',
+    'NOCHE': 'Noche', 'N': 'Noche', 'noche': 'Noche'
+}
+df['turno'] = df['turno'].replace(mapeo_turnos)
+
+# 3. Limpiar fuerza (quitar puntos)
+df['fuerza_rodillos_ton'] = df['fuerza_rodillos_ton'].astype(str).str.replace('.', '').str.replace(',', '')
+
+# 4. Filtrar valores válidos
+df_limpio = df[
+    (df['espesor_entrada_mm'].between(150, 250)) &
+    (df['espesor_salida_mm'].between(10, 50)) &
+    (df['temperatura_laminacion_c'].between(900, 1200))
+].copy()}
+
+## Solución Rápida con Power Query (Ejemplo)
+                                    
+// 1. Reemplazar valores en velocidad
+= Table.ReplaceValue(#"Datos originales", "<3", "2.9", Replacer.ReplaceText, {"velocidad_laminacion_mps"})
+= Table.ReplaceValue(#"Reemplazado <3", ">8", "8.1", Replacer.ReplaceText, {"velocidad_laminacion_mps"})
+
+// 2. Limpiar fuerza (quitar puntos)
+= Table.TransformColumns(#"Reemplazado velocidad", {{"fuerza_rodillos_ton", each Text.Replace(_, ".", ""), type text}})
+
+// 3. Convertir a números
+= Table.TransformColumnTypes(#"Limpieza fuerza", {
+    {"espesor_entrada_mm", type number},
+    {"velocidad_laminacion_mps", type number}
+})
+
+// 4. Filtrar valores válidos
+= Table.SelectRows(#"Convertido a números", each [temperatura_laminacion_c] >= 900 and [temperatura_laminacion_c] <= 1200)
+
+// 5. Agrupar por turno
+= Table.Group(#"Filtrado", {"turno"}, {
+    {"Promedio Temperatura", each List.Average([temperatura_laminacion_c]), type number},
+    {"Total Defectos", each List.Count(List.Select([defectos], each _ <> "ok")), type number}
+})
+
+
+  Formato del Archivo
+Nombre: dataset_laminacion_acero_sucio.csv
+
+Codificación: UTF-8 with BOM (utf-8-sig)
+
+Separador: Coma (,)
+
+Decimales: Punto (.) excepto en errores intencionales
+
+Filas: ~1,010
+
+Tamaño: ~50 KB
+
+Limitaciones y Notas
+Dataset sintético: Los datos no provienen de procesos reales, pero los patrones de error son realistas
+
+Fechas: Limitado a enero 2024 para simplificar
+
+Distribución de defectos: Proporciones ajustadas para práctica (70% ok, 30% defectos)
+
+Sin relaciones complejas: No hay dependencias temporales entre lotes
+
+Recursos Adicionales
