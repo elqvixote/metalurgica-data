@@ -73,7 +73,6 @@ Esto significa que puedes:
 ----
 ## 📬 Contacto
 ¿Tienes preguntas, sugerencias o deseas contribuir?
-- 📧 contacto@fornax.lat
 - 💼 [LinkedIn](https://www.linkedin.com/in/robertosheldon/)
 ---
 ## ☕ Apóyame en Ko-fi
